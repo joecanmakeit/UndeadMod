@@ -42,14 +42,19 @@ public class DKWMod {
 	@SidedProxy(clientSide="com.marablefamily.dkwmod.client.ClientProxy", serverSide="com.marablefamily.dkwmod.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static int deathWorldId = -2;
+	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+		GameRegistry.registerItem(tpDeath, "tpDeath");
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
+		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
+		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 	}
 
 	@EventHandler

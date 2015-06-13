@@ -16,39 +16,27 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class MyWorldChunkManager extends WorldChunkManager {
-	private GenLayer myGenBiomes;
-	private GenLayer myBiomeIndexLayer;
-	private BiomeCache myBiomeCache;
-	private List<BiomeGenBase> myBiomesToSpawnIn;
-
-	protected MyWorldChunkManager()
-	{
-		this.myBiomeCache = new BiomeCache(this);
-		this.myBiomesToSpawnIn = new ArrayList<BiomeGenBase>();
-		this.myBiomesToSpawnIn.add(BiomeGenBase.beach);
-		//this.myBiomesToSpawnIn.add(Main.TutorialBiome2);
-		//this.myBiomesToSpawnIn.add(Main.TutorialBiome3);
-		//this.myBiomesToSpawnIn.add(Main.TutorialBiome4);
-	}
-
-	public MyWorldChunkManager(long seed, WorldType worldtype)
-	{
-		this();
-		// i changed this to my GenLayerTutorial
-		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed);
-		this.myGenBiomes = agenlayer[0];
-		this.myBiomeIndexLayer = agenlayer[1];
-	}
+public class WorldChunkManagerDeath extends WorldChunkManager {
 	
-	public MyWorldChunkManager(long seed, WorldType worldtype, BiomeGenBase[] biomes, int biomeSize) {
-		this(seed, worldtype);
-		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed, biomes, biomeSize);
-		this.myGenBiomes = agenlayer[0];
-		this.myBiomeIndexLayer = agenlayer[1];
+	private GenLayer genBiomes;
+	private GenLayer biomeIndexLayer;
+	private BiomeCache biomeCache;
+	private List<BiomeGenBase> biomesToSpawnIn;
+	private BiomeGenBase[] allowedBiomes = {
+		BiomeGenBase.beach
+	};
+
+	public WorldChunkManagerDeath(long seed, WorldType worldtype)
+	{
+		this.biomeCache = new BiomeCache(this);
+		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
+		this.biomesToSpawnIn.add(BiomeGenBase.beach);
+		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed, allowedBiomes, 5);
+		this.genBiomes = agenlayer[0];
+		this.biomeIndexLayer = agenlayer[1];
 	}
 
-	public MyWorldChunkManager(World world)
+	public WorldChunkManagerDeath(World world)
 	{
 		this(world.getSeed(), world.provider.terrainType);
 	}
@@ -58,7 +46,7 @@ public class MyWorldChunkManager extends WorldChunkManager {
 	 */
 	public List<BiomeGenBase> getBiomesToSpawnIn()
 	{
-		return this.myBiomesToSpawnIn;
+		return this.biomesToSpawnIn;
 	}
 
 	/**
@@ -66,10 +54,10 @@ public class MyWorldChunkManager extends WorldChunkManager {
 	 */
 	public BiomeGenBase getBiomeGenAt(int x, int z)
 	{
-		BiomeGenBase biome = this.myBiomeCache.getBiomeGenAt(x, z);
+		BiomeGenBase biome = this.biomeCache.getBiomeGenAt(x, z);
 		if (biome == null)
 		{
-			return BiomeGenBase.birchForest;
+			return BiomeGenBase.beach;
 		}
 
 		return biome;
@@ -109,7 +97,7 @@ public class MyWorldChunkManager extends WorldChunkManager {
 			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
 		}
 
-		int[] aint = this.myGenBiomes.getInts(par2, par3, par4, par5);
+		int[] aint = this.genBiomes.getInts(par2, par3, par4, par5);
 
 		for (int i = 0; i < par4 * par5; ++i) {
 			if (aint[i] >= 0) {
@@ -145,11 +133,11 @@ public class MyWorldChunkManager extends WorldChunkManager {
 		}
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (y & 15) == 0) {
-			BiomeGenBase[] abiomegenbase1 = this.myBiomeCache.getCachedBiomes(x, y);
+			BiomeGenBase[] abiomegenbase1 = this.biomeCache.getCachedBiomes(x, y);
 			System.arraycopy(abiomegenbase1, 0, par1ArrayOfBiomeGenBase, 0, width * length);
 			return par1ArrayOfBiomeGenBase;
 		} else {
-			int[] aint = this.myBiomeIndexLayer.getInts(x, y, width, length);
+			int[] aint = this.biomeIndexLayer.getInts(x, y, width, length);
 
 			for (int i = 0; i < width * length; ++i) {
 				if (aint[i] >= 0) {
@@ -175,7 +163,7 @@ public class MyWorldChunkManager extends WorldChunkManager {
 		int k1 = par2 + par3 >> 2;
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
-		int[] aint = this.myGenBiomes.getInts(l, i1, l1, i2);
+		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
 
 		for (int j2 = 0; j2 < l1 * i2; ++j2) {
 			BiomeGenBase biomegenbase = BiomeGenBase.getBiomeGenArray()[aint[j2]];
@@ -201,7 +189,7 @@ public class MyWorldChunkManager extends WorldChunkManager {
 		int k1 = par2 + par3 >> 2;
 		int l1 = j1 - l + 1;
 		int i2 = k1 - i1 + 1;
-		int[] aint = this.myGenBiomes.getInts(l, i1, l1, i2);
+		int[] aint = this.genBiomes.getInts(l, i1, l1, i2);
 		ChunkPosition chunkposition = null;
 		int j2 = 0;
 
@@ -224,6 +212,7 @@ public class MyWorldChunkManager extends WorldChunkManager {
 	 */
 	public void cleanupCache()
 	{
-		this.myBiomeCache.cleanupCache();
+		this.biomeCache.cleanupCache();
 	}
+
 }
