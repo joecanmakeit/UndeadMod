@@ -1,12 +1,13 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import java.awt.Color;
+
+import com.marablefamily.dkwmod.DKWMod;
 
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import dkwmod.DKWMod;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;

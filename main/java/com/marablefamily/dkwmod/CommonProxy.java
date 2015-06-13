@@ -1,4 +1,4 @@
-package dkwmod;
+package com.marablefamily.dkwmod;
 
 public class CommonProxy {
 

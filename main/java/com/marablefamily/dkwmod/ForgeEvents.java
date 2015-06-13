@@ -1,4 +1,4 @@
-package dkwmod;
+package com.marablefamily.dkwmod;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class DKWForgeEvents {
+public class ForgeEvents {
 
 	@SubscribeEvent
 	public void onPlayerClick(PlayerInteractEvent e) {

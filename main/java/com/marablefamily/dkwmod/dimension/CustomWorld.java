@@ -1,6 +1,7 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
-import dkwmod.DKWMod;
+import com.marablefamily.dkwmod.DKWMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;

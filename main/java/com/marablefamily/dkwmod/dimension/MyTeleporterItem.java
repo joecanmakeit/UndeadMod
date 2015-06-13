@@ -1,7 +1,8 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
+
+import com.marablefamily.dkwmod.DKWMod;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import dkwmod.DKWMod;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

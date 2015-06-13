@@ -1,8 +1,9 @@
-package dkwmod.client;
+package com.marablefamily.dkwmod.client;
+
+import com.marablefamily.dkwmod.CommonProxy;
+import com.marablefamily.dkwmod.DKWMod;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import dkwmod.CommonProxy;
-import dkwmod.DKWMod;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.entity.RenderZombie;

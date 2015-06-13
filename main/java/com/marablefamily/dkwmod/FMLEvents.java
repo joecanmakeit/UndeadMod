@@ -1,4 +1,4 @@
-package dkwmod;
+package com.marablefamily.dkwmod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 
-public class DKWFMLEvents {
+public class FMLEvents {
 
 	int tickCount = 0;
 	int height = 1;

@@ -1,4 +1,4 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;

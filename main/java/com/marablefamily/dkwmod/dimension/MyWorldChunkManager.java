@@ -1,4 +1,4 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import java.util.ArrayList;
 import java.util.Arrays;

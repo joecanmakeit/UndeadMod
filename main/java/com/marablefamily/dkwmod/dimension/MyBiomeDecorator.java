@@ -1,4 +1,4 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM;
 import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.CACTUS;
@@ -27,7 +27,8 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 import java.util.ArrayList;
 import java.util.Random;
 
-import dkwmod.DKWMod;
+import com.marablefamily.dkwmod.DKWMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;

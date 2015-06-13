@@ -1,4 +1,4 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;

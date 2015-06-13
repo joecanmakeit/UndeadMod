@@ -1,4 +1,4 @@
-package dkwmod.dimension;
+package com.marablefamily.dkwmod.dimension;
 
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
@@ -39,7 +39,7 @@ public abstract class MyGenLayer extends GenLayer {
 		// more GenLayerZoom = bigger biomes
 		long l = 1000L;
 		for (int i = 0; i < biomeSize; i++) {
-			biomes = new GenLayerZoom(1000L, biomes);
+			biomes = new GenLayerZoom(l, biomes);
 			l += 1L;
 		}
 

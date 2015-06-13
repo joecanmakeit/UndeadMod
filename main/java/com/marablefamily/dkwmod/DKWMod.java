@@ -1,8 +1,10 @@
-package dkwmod;
+package com.marablefamily.dkwmod;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.marablefamily.dkwmod.dimension.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -32,13 +34,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import dkwmod.dimension.*;
 
 @Mod(modid="dkwmod", name="Death Knight World", version="0.1")
 public class DKWMod {
 	@Instance(value = "1")
 	public static DKWMod instance;
-	@SidedProxy(clientSide="dkwmod.client.ClientProxy", serverSide="dkwmod.CommonProxy")
+	@SidedProxy(clientSide="com.marablefamily.dkwmod.client.ClientProxy", serverSide="com.marablefamily.dkwmod.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler
@@ -48,7 +49,7 @@ public class DKWMod {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		proxy.registerRenderers();		
+		proxy.registerRenderers();
 	}
 
 	@EventHandler
