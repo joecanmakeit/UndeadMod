@@ -61,22 +61,7 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
 	
     public BiomeDecoratorDeath(Block base)
     {
-        this.treesPerChunk = 2;
-        this.flowersPerChunk = 3;
-        this.grassPerChunk = 3;
-        this.mushroomsPerChunk = 1;
-        this.bigMushroomsPerChunk = 0;
-        this.deadBushPerChunk = 3;
-        this.cactiPerChunk = 2;
-        this.reedsPerChunk = 5;
-        this.waterlilyPerChunk = 4;
-        this.underwaterSandPerChunk = 3;
-        this.underwaterGravelPerChunk = 1;
-        this.clayPerChunk = 1;
-        this.generateLakes = true;
-
-        // ORE SPAWNING
-    	addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, CUSTOM);
+    	
     } 
  
     @Override

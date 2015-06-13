@@ -52,8 +52,8 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 	public BiomeGenDeadPlains(int id, Block base) {
 		super(id);
 		this.baseBlock = base;
-		this.theBiomeDecorator = new MyBiomeDecorator(baseBlock);
-		MyBiomeDecorator decorator = (MyBiomeDecorator)theBiomeDecorator;
+		this.theBiomeDecorator = new BiomeDecoratorDeath(baseBlock);
+		BiomeDecoratorDeath decorator = (BiomeDecoratorDeath)theBiomeDecorator;
 		this.spawnableMonsterList = new ArrayList();
         this.spawnableCreatureList = new ArrayList();
         this.setBiomeName("DeadPlains");
@@ -69,19 +69,6 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		this.waterColorMultiplier = 0x000011;
 		
 		// DECORATIONS
-		decorator.treesPerChunk = 0;
-		decorator.flowersPerChunk = 0;
-		decorator.grassPerChunk = 0;
-		decorator.mushroomsPerChunk = 0;
-		decorator.bigMushroomsPerChunk = 0;
-		decorator.deadBushPerChunk = 0;
-		decorator.cactiPerChunk = 0;
-		decorator.reedsPerChunk = 0;
-		decorator.waterlilyPerChunk = 0;
-		decorator.underwaterSandPerChunk = 0;
-		decorator.underwaterGravelPerChunk = 0;
-		decorator.clayPerChunk = 0;
-		decorator.generateLakes = true;
 
         // ORE SPAWNING
 		decorator.addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, DIRT);
