@@ -1,7 +1,6 @@
 package com.marablefamily.dkwmod.dimension;
 
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD;
@@ -12,8 +11,6 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import com.marablefamily.dkwmod.DKWMod;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,42 +32,37 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class MyBiomeBase extends BiomeGenBase {
+public class BiomeGenDeadPlains extends BiomeGenBase {
 
-	public Block baseBlock = Blocks.stone;
-	public int grassColor = -1;
-	public int foliageColor = -1;
-	public float heightBase = 0.2F;
-	public float heightVariation = 0.1F;
+	public Block baseBlock;
+	public int grassColor;
+	public int foliageColor;
+	public float heightBase;
+	public float heightVariation;
 	
-	public MyBiomeBase(int p_i1971_1_) {
-		this(p_i1971_1_, Blocks.stone);
+	public BiomeGenDeadPlains(int id) {
+		this(id, Blocks.stone);
 	}
 	
-	public MyBiomeBase(int i, Block base) {
-		super(i);
-		baseBlock = base;
+	public BiomeGenDeadPlains(int id, Block base) {
+		super(id);
+		this.baseBlock = base;
 		this.theBiomeDecorator = new MyBiomeDecorator(baseBlock);
-		
-		// COPY FROM HERE...
-		
-		// SETUP CODE (DO NOT EDIT!)
 		MyBiomeDecorator decorator = (MyBiomeDecorator)theBiomeDecorator;
 		this.spawnableMonsterList = new ArrayList();
         this.spawnableCreatureList = new ArrayList();
 
 		// BASICS
-		this.topBlock = Blocks.grass;
-		this.fillerBlock = Blocks.dirt;
-		this.heightBase = 0.0F;
-		this.heightVariation = 0.0F;
+		this.topBlock = Blocks.soul_sand;
+		this.fillerBlock = Blocks.cobblestone;
+		this.heightBase = 0.3F;
+		this.heightVariation = 0.4F;
 		this.enableSnow = true;
-		this.grassColor = 0x2FB22F;
-		this.foliageColor = 0x017901;
-		this.waterColorMultiplier = 0x309BF5;
+		this.grassColor = 0x222222;
+		this.foliageColor = 0x111111;
+		this.waterColorMultiplier = 0x000000;
 		
 		// DECORATIONS
 		decorator.treesPerChunk = 0;
@@ -116,9 +108,7 @@ public class MyBiomeBase extends BiomeGenBase {
 		this.setHeight(new BiomeGenBase.Height(heightBase, heightVariation));
 		this.setTemperatureRainfall(this.enableSnow ? -0.5F : 0.5F, 0.5F);
 		
-		// ...TO HERE!
-		
-	}  // <-- DON'T COPY THIS CURLY BRACKET!
+	}
 	
 	public void genTerrainBlocks(World var1, Random var2, Block[] var3, byte[] var4, int var5, int var6, double var7) 
     {
@@ -247,5 +237,6 @@ public class MyBiomeBase extends BiomeGenBase {
 		}
 		return this.grassColor;
     }
+
 
 }
