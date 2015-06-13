@@ -46,13 +46,12 @@ public class DKWMod {
 	public static int deathWorldId = -2;
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
-	public static CorruptSoil corruptSoil = new CorruptSoil();
 	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		GameRegistry.registerItem(tpDeath, "tpDeath");
-		GameRegistry.registerBlock(corruptSoil, "corruptSoil");
+		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 	}
 
 	@EventHandler
