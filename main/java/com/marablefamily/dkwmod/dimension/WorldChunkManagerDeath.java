@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.marablefamily.dkwmod.DKWMod;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.world.ChunkPosition;
@@ -22,11 +24,8 @@ public class WorldChunkManagerDeath extends WorldChunkManager {
 	private GenLayer biomeIndexLayer;
 	private BiomeCache biomeCache;
 	private List<BiomeGenBase> biomesToSpawnIn;
-	private BiomeGenBase[] allowedBiomes = {
-		BiomeGenBase.beach
-	};
 
-	public WorldChunkManagerDeath(long seed, WorldType worldtype)
+	public WorldChunkManagerDeath(long seed, WorldType worldtype, BiomeGenBase[] allowedBiomes)
 	{
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
@@ -34,11 +33,6 @@ public class WorldChunkManagerDeath extends WorldChunkManager {
 		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed, allowedBiomes, 5);
 		this.genBiomes = agenlayer[0];
 		this.biomeIndexLayer = agenlayer[1];
-	}
-
-	public WorldChunkManagerDeath(World world)
-	{
-		this(world.getSeed(), world.provider.terrainType);
 	}
 
 	/**

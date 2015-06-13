@@ -59,7 +59,7 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		this.fillerBlock = Blocks.cobblestone;
 		this.heightBase = 0.3F;
 		this.heightVariation = 0.4F;
-		this.enableSnow = true;
+		this.enableSnow = false;
 		this.grassColor = 0x222222;
 		this.foliageColor = 0x111111;
 		this.waterColorMultiplier = 0x000000;

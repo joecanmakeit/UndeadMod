@@ -43,7 +43,9 @@ public class DKWMod {
 	public static CommonProxy proxy;
 	
 	public static int deathWorldId = -2;
+	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
+	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
