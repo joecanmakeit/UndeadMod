@@ -15,14 +15,14 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderDeath extends WorldProvider {
 	
 	public static Block baseBlock = Blocks.stone;
 	public static float daySpeed = 1.0F;
-	public static String colorFog = "#000055";
+	public static String colorFog = "#000033";
 	public static String colorSky = "#999999";
-	public static String colorClouds = "002222";
 	public static String colorSunriseSunset = "#000088";
 	
 	private static BiomeGenBase[] allowedBiomes = {
@@ -40,6 +40,23 @@ public class WorldProviderDeath extends WorldProvider {
 		this.worldObj.getWorldInfo().setTerrainType(WorldType.DEFAULT);
 		this.worldChunkMgr = new WorldChunkManagerDeath(worldObj.getSeed(), WorldType.DEFAULT, allowedBiomes);
 	}
+	
+	protected void generateLightBrightnessTable()
+    {
+        float f = 0.2F;
+
+        for (int i = 0; i <= 15; ++i)
+        {
+            float f1 = 1.0F - (float)i / 15.0F;
+            this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+        }
+    }
+	
+	@Override
+	public boolean isSurfaceWorld()
+    {
+        return false;
+    }
 	
 	@Override
     public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_)
@@ -208,57 +225,6 @@ public class WorldProviderDeath extends WorldProvider {
         {
             return null;
         }
-    }
-	
-	@Override
-    @SideOnly(Side.CLIENT)
-    public Vec3 drawClouds(float partialTicks)
-    {
-        float f1 = worldObj.getCelestialAngle(partialTicks);
-        float f2 = MathHelper.cos(f1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
-
-        if (f2 < 0.0F)
-        {
-            f2 = 0.0F;
-        }
-
-        if (f2 > 1.0F)
-        {
-            f2 = 1.0F;
-        }
-
-        Color color = Color.decode(this.colorClouds);
-        float f3 = ((float)(color.getRed()))/255.0F;
-        float f4 = ((float)(color.getGreen()))/255.0F;
-        float f5 = ((float)(color.getBlue()))/255.0F;
-        float f6 = worldObj.getRainStrength(partialTicks);
-        float f7;
-        float f8;
-
-        if (f6 > 0.0F)
-        {
-            f7 = (f3 * 0.3F + f4 * 0.59F + f5 * 0.11F) * 0.6F;
-            f8 = 1.0F - f6 * 0.95F;
-            f3 = f3 * f8 + f7 * (1.0F - f8);
-            f4 = f4 * f8 + f7 * (1.0F - f8);
-            f5 = f5 * f8 + f7 * (1.0F - f8);
-        }
-
-        f3 *= f2 * 0.9F + 0.1F;
-        f4 *= f2 * 0.9F + 0.1F;
-        f5 *= f2 * 0.85F + 0.15F;
-        f7 = worldObj.getWeightedThunderStrength(partialTicks);
-
-        if (f7 > 0.0F)
-        {
-            f8 = (f3 * 0.3F + f4 * 0.59F + f5 * 0.11F) * 0.2F;
-            float f9 = 1.0F - f7 * 0.95F;
-            f3 = f3 * f9 + f8 * (1.0F - f9);
-            f4 = f4 * f9 + f8 * (1.0F - f9);
-            f5 = f5 * f9 + f8 * (1.0F - f9);
-        }
-
-        return Vec3.createVectorHelper((double)f3, (double)f4, (double)f5);
     }
 	
 	@Override
