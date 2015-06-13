@@ -12,6 +12,8 @@ import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.Ev
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.marablefamily.dkwmod.DKWMod;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -55,8 +57,8 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
         this.spawnableCreatureList = new ArrayList();
 
 		// BASICS
-		this.topBlock = Blocks.soul_sand;
-		this.fillerBlock = Blocks.cobblestone;
+		this.topBlock = DKWMod.corruptSoil;
+		this.fillerBlock = DKWMod.corruptSoil;
 		this.heightBase = 1.5F;
 		this.heightVariation = 3.0F;
 		this.enableSnow = false;
@@ -80,8 +82,8 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		decorator.generateLakes = true;
 
         // ORE SPAWNING
-		decorator.addOreSpawn(Blocks.dirt, 32, 20, 0, 256, base, DIRT);
-		decorator.addOreSpawn(Blocks.dirt, 16, 40, 0, 256, base, DIRT);
+		decorator.addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, DIRT);
+		decorator.addOreSpawn(Blocks.obsidian, 16, 40, 0, 256, base, DIRT);
 
     	// CREATURE SPAWNING
 		

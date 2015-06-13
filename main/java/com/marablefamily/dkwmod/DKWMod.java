@@ -47,7 +47,7 @@ public class DKWMod {
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
 	public static CorruptSoil corruptSoil = new CorruptSoil();
-	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
+	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, corruptSoil);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -58,6 +58,7 @@ public class DKWMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
+		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 	}

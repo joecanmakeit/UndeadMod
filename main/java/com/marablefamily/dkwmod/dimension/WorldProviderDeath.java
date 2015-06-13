@@ -19,7 +19,7 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderDeath extends WorldProvider {
 	
-	public static Block baseBlock = Blocks.stone;
+	public static Block baseBlock = DKWMod.corruptSoil;
 	public static float daySpeed = 1.0F;
 	public static String colorFog = "#000033";
 	public static String colorSky = "#999999";
