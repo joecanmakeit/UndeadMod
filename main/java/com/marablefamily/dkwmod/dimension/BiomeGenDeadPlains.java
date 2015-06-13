@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.marablefamily.dkwmod.DKWMod;
+import com.marablefamily.dkwmod.block.CorruptSoil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -57,8 +58,8 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
         this.spawnableCreatureList = new ArrayList();
 
 		// BASICS
-		this.topBlock = DKWMod.corruptSoil;
-		this.fillerBlock = DKWMod.corruptSoil;
+		this.topBlock = CorruptSoil.instance;
+		this.fillerBlock = CorruptSoil.instance;
 		this.heightBase = 1.5F;
 		this.heightVariation = 3.0F;
 		this.enableSnow = false;
