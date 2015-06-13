@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dkwmod",
+  "name": "Death Knight World",
+  "description": "Undead dimension and stuff.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Joe Eli Tommy"],
+  "credits": "Joe Eli Tommy",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
