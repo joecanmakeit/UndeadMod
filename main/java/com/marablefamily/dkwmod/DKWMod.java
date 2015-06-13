@@ -22,8 +22,11 @@ import net.minecraft.potion.Potion;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -46,7 +49,8 @@ public class DKWMod {
 	public static int deathWorldId = -2;
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
-	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, CorruptSoil.instance);
+	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		GameRegistry.registerItem(tpDeath, "tpDeath");
@@ -57,6 +61,7 @@ public class DKWMod {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
+		BiomeManager.addBiome(BiomeType.ICY, new BiomeEntry(deadPlains, 0));
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 	}

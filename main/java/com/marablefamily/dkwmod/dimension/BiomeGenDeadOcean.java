@@ -1,35 +1,19 @@
 package com.marablefamily.dkwmod.dimension;
 
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND;
 import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.LAPIS;
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.marablefamily.dkwmod.DKWMod;
 import com.marablefamily.dkwmod.block.CorruptSoil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ColorizerFoliage;
@@ -37,7 +21,7 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class BiomeGenDeadPlains extends BiomeGenBase {
+public class BiomeGenDeadOcean extends BiomeGenBase {
 
 	public Block baseBlock;
 	public int grassColor;
@@ -45,11 +29,11 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 	public float heightBase;
 	public float heightVariation;
 	
-	public BiomeGenDeadPlains(int id) {
+	public BiomeGenDeadOcean(int id) {
 		this(id, Blocks.stone);
 	}
 	
-	public BiomeGenDeadPlains(int id, Block base) {
+	public BiomeGenDeadOcean(int id, Block base) {
 		super(id);
 		this.baseBlock = base;
 		this.theBiomeDecorator = new MyBiomeDecorator(baseBlock);
@@ -227,6 +211,5 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		}
 		return this.grassColor;
     }
-
-
+	
 }

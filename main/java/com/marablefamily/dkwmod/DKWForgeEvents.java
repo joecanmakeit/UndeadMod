@@ -30,7 +30,7 @@ public class DKWForgeEvents {
 		if (e.entity.dimension == DKWMod.deathWorldId) {
 			e.setCanceled(true);
 			GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
-			e.density = 0.3F;
+			e.density = 0.03F;
 		}
 	}
 }

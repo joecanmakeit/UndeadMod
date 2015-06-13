@@ -27,7 +27,7 @@ public class CorruptSoil extends Block {
 		this.setBlockTextureName("myassets:corruptsoil");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setHardness(0.8F);
-		this.setTickRandomly(true);
+		this.setTickRandomly(false);
 	}
 	
 	/**
@@ -45,20 +45,24 @@ public class CorruptSoil extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+	/*
     public void updateTick(World world, int x, int y, int z, Random r) {
 
-    	double corruptionPulse = Math.sin((double)world.getWorldTime() * 0.001) * 0.5 + 0.5;
-    	
-    	if (r.nextDouble() > corruptionPulse) {
-    		if (r.nextDouble() < expansionChance[countAdjacentBlocks(world, x, y, z, Blocks.air)]) {
-    			convertAdjacentBlock(world, x, y, z, r);
-    		}
-    	} else {
-    		if (r.nextDouble() < reductionChance[countAdjacentBlocks(world,x,y,z,instance)]) {
-    			world.setBlock(x,y,z,Blocks.air);
-    		}
+    	if (r.nextDouble() > 0.8) {
+	    	double corruptionPulse = Math.sin((double)world.getWorldTime() * 0.001) * 0.5 + 0.5;
+	    	
+	    	if (r.nextDouble() > corruptionPulse) {
+	    		if (r.nextDouble() < expansionChance[countAdjacentBlocks(world, x, y, z, Blocks.air)]) {
+	    			convertAdjacentBlock(world, x, y, z, r);
+	    		}
+	    	} else {
+	    		if (r.nextDouble() < reductionChance[countAdjacentBlocks(world,x,y,z,instance)]) {
+	    			world.setBlock(x,y,z,Blocks.air);
+	    		}
+	    	}
     	}
     }
+    */
     
     private int countAdjacentBlocks(World world, int x, int y, int z, Block blockType) {
     	int count = 0;

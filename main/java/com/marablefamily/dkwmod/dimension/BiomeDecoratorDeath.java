@@ -1,0 +1,191 @@
+package com.marablefamily.dkwmod.dimension;
+
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.CACTUS;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.CLAY;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.DEAD_BUSH;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.LAKE;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.LILYPAD;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.PUMPKIN;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.REED;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SAND;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SAND_PASS2;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.SHROOM;
+import static net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.COAL;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIAMOND;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.DIRT;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GOLD;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.GRAVEL;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.LAPIS;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.REDSTONE;
+import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.CUSTOM;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import com.marablefamily.dkwmod.dimension.MyBiomeDecorator.Ore;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+import net.minecraft.world.gen.feature.WorldGenCactus;
+import net.minecraft.world.gen.feature.WorldGenDeadBush;
+import net.minecraft.world.gen.feature.WorldGenFlowers;
+import net.minecraft.world.gen.feature.WorldGenLiquids;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenPumpkin;
+import net.minecraft.world.gen.feature.WorldGenReed;
+import net.minecraft.world.gen.feature.WorldGenSand;
+import net.minecraft.world.gen.feature.WorldGenWaterlily;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.OreGenEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
+
+public class BiomeDecoratorDeath extends BiomeDecorator {
+
+	public ArrayList<Ore> oreGenList = new ArrayList<Ore>();
+    public int underwaterSandPerChunk;
+    public int underwaterGravelPerChunk;
+	
+    public BiomeDecoratorDeath(Block base)
+    {
+        this.treesPerChunk = 2;
+        this.flowersPerChunk = 3;
+        this.grassPerChunk = 3;
+        this.mushroomsPerChunk = 1;
+        this.bigMushroomsPerChunk = 0;
+        this.deadBushPerChunk = 3;
+        this.cactiPerChunk = 2;
+        this.reedsPerChunk = 5;
+        this.waterlilyPerChunk = 4;
+        this.underwaterSandPerChunk = 3;
+        this.underwaterGravelPerChunk = 1;
+        this.clayPerChunk = 1;
+        this.generateLakes = true;
+
+        // ORE SPAWNING
+    	addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, CUSTOM);
+    } 
+ 
+    @Override
+    public void decorateChunk(World p_150512_1_, Random p_150512_2_, BiomeGenBase p_150512_3_, int p_150512_4_, int p_150512_5_)
+    {
+        if (this.currentWorld != null)
+        {
+            throw new RuntimeException("Already decorating!!");
+        }
+        else
+        {
+            this.currentWorld = p_150512_1_;
+            this.randomGenerator = p_150512_2_;
+            this.chunk_X = p_150512_4_;
+            this.chunk_Z = p_150512_5_;
+            this.genDecorations(p_150512_3_);
+            this.currentWorld = null;
+            this.randomGenerator = null;
+        }
+    }
+    
+    @Override
+    protected void genDecorations(BiomeGenBase p_150513_1_)
+    {
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(currentWorld, randomGenerator, chunk_X, chunk_Z));
+        this.generateOres();
+        int i;
+        int j;
+        int k;
+        int l;
+        int i1;
+
+        boolean doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, DEAD_BUSH);
+        for (j = 0; doGen && j < this.deadBushPerChunk; ++j)
+        {
+            k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
+           // (new WorldGenDeadBush(Blocks.deadbush)).generate(this.currentWorld, this.randomGenerator, k, i1, l);
+        }
+
+        doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, CACTUS);
+        for (j = 0; doGen && j < this.cactiPerChunk; ++j)
+        {
+            k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
+            //this.cactusGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
+        }
+        
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
+    }
+    
+    private int nextInt(int i) {
+        if (i <= 1)
+            return 0;
+        return this.randomGenerator.nextInt(i);
+	}
+   
+    class Ore {
+    	public WorldGenMinable node;
+    	public Block ore;
+    	public int minHeight;
+    	public int maxHeight;
+    	public int freq;
+    	public OreGenEvent.GenerateMinable.EventType type;
+    	
+    	public Ore(Block ore, int size, int freq, int min, int max, Block base, OreGenEvent.GenerateMinable.EventType type) {
+    		this.node = new WorldGenMinable(ore, size, base);
+    		minHeight = min;
+    		maxHeight = max;
+    		this.type = type;
+    		this.ore = ore;
+    		this.freq = freq;
+    	}
+    }
+    
+    public void genCustomOre(Ore o) {
+    	if (TerrainGen.generateOre(currentWorld, randomGenerator, o.node, chunk_X, chunk_Z, o.type)) {
+    		if (o.ore == Blocks.lapis_ore) this.genStandardOre2(o.freq, o.node, o.minHeight, o.maxHeight);
+    		else this.genStandardOre1(o.freq, o.node, o.minHeight, o.maxHeight);
+    	}
+    }
+    
+    public void addOreSpawn(Block ore, int size, int freq, int min, int max, Block base, OreGenEvent.GenerateMinable.EventType type) {
+    	this.oreGenList.add(new Ore(ore, size, freq, min, max, base, type));
+    }
+    
+    public void removeOreSpawn(Block ore) {
+    	Ore target = null;
+    	for (Ore o : this.oreGenList) {
+    		if (o.ore == ore) target = o;
+    	}
+    	this.oreGenList.remove(target);
+    }
+    
+    
+    @Override
+    protected void generateOres()
+    {
+        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Pre(currentWorld, randomGenerator, chunk_X, chunk_Z));
+    
+        // ORE GENERATIONS
+        for (Ore o : oreGenList) {
+        	genCustomOre(o);
+        }
+        
+        MinecraftForge.ORE_GEN_BUS.post(new OreGenEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
+    }
+
+	
+}

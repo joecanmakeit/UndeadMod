@@ -20,9 +20,9 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderDeath extends WorldProvider {
 	
-	public static Block baseBlock = CorruptSoil.instance;
+	public static Block baseBlock = Blocks.stone;
 	public static float daySpeed = 1.0F;
-	public static String colorFog = "#000033";
+	public static String colorFog = "#777788";
 	public static String colorSky = "#999999";
 	public static String colorSunriseSunset = "#000088";
 	
