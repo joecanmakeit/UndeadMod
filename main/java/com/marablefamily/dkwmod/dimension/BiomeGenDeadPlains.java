@@ -57,12 +57,12 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		// BASICS
 		this.topBlock = Blocks.soul_sand;
 		this.fillerBlock = Blocks.cobblestone;
-		this.heightBase = 0.3F;
-		this.heightVariation = 0.4F;
+		this.heightBase = 1.5F;
+		this.heightVariation = 3.0F;
 		this.enableSnow = false;
 		this.grassColor = 0x222222;
 		this.foliageColor = 0x111111;
-		this.waterColorMultiplier = 0x000000;
+		this.waterColorMultiplier = 0x000011;
 		
 		// DECORATIONS
 		decorator.treesPerChunk = 0;
@@ -81,28 +81,14 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 
         // ORE SPAWNING
 		decorator.addOreSpawn(Blocks.dirt, 32, 20, 0, 256, base, DIRT);
-		decorator.addOreSpawn(Blocks.gravel, 32, 10, 0, 256, base, GRAVEL);
-		decorator.addOreSpawn(Blocks.coal_ore, 16, 20, 0, 128, base, COAL);
-		decorator.addOreSpawn(Blocks.iron_ore, 8, 20, 0, 256, base, IRON);
-		decorator.addOreSpawn(Blocks.gold_ore, 8, 2, 0, 32, base, GOLD);
-		decorator.addOreSpawn(Blocks.redstone_ore, 7, 8, 0, 16, base, REDSTONE);
-		decorator.addOreSpawn(Blocks.diamond_ore, 7, 1, 0, 16, base, DIAMOND);
-		decorator.addOreSpawn(Blocks.lapis_ore, 6, 1, 16, 16, base, LAPIS);
+		decorator.addOreSpawn(Blocks.dirt, 16, 40, 0, 256, base, DIRT);
 
     	// CREATURE SPAWNING
-		this.addCreatureSpawn(EntitySheep.class, 12, 4, 4);
-		this.addCreatureSpawn(EntityPig.class, 10, 4, 4);
-		this.addCreatureSpawn(EntityChicken.class, 10, 4, 4);
-		this.addCreatureSpawn(EntityCow.class, 8, 4, 4);
 		
 		// MONSTER SPAWNING
 		this.addMonsterSpawn(EntitySpider.class, 100, 4, 4);
 		this.addMonsterSpawn(EntityZombie.class, 100, 4, 4);
 		this.addMonsterSpawn(EntitySkeleton.class, 100, 4, 4);
-		this.addMonsterSpawn(EntityCreeper.class, 100, 4, 4);
-		this.addMonsterSpawn(EntitySlime.class, 100, 4, 4);
-		this.addMonsterSpawn(EntityEnderman.class, 10, 1, 4);
-		this.addMonsterSpawn(EntityWitch.class, 5, 1, 1);
 		
 		// WRAP-UP CODE (DO NOT EDIT!)
 		this.setHeight(new BiomeGenBase.Height(heightBase, heightVariation));
