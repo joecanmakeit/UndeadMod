@@ -94,6 +94,59 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
         }
     }
     
+    private void tommyGeneration(final World world, final int cx, final int cz, Random r) {
+    	final int y = r.nextInt(110) + 8;
+    	final int x = cx + 5;
+    	final int z = cz + 5;
+    	class Helper {
+    		void cobb(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.cobblestone,0,2);}
+    		void dirt(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.dirt,0,2);}
+    		void grass(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.grass,0,2);}
+    		void glow(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.glowstone,0,2);}
+    		void redb(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.redstone_block,0,2);}
+    		void redd(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.redstone_wire,0,2);}
+    		void piston(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.piston,0,2);}
+    		void tnt(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.tnt,0,2);}
+    		void air(int dx, int dy, int dz) {world.setBlock(x+dx,y+dy,z+dz,Blocks.air,0,2);}
+    		void g() {
+    	    	glow(3,1,4);
+    	    	air(3,2,4);
+    	    	grass(2,1,4);
+    	    	air(2,2,4);
+    	    	dirt(2,1,3);
+    	    	air(2,2,3);
+    	    	
+    	    	piston(2,1,2);
+    	    	cobb(2,0,2);
+    	    	redb(2,2,1);
+    	    	air(2,2,2);
+    	    	air(2,1,1);
+    	    	
+    	    	redb(0,-1,2);
+    	    	cobb(1,-2,2);
+    	    	redd(1,-1,2);
+    	    	air(2,-1,2);
+    	    	tnt(3,-1,2);
+    	    	cobb(3,-2,2);
+
+/*
+    	    	final int BOX_SIZE = 3;
+    	    	final int BS = BOX_SIZE;
+    	    	for(int i = 0; i < BS; ++i)
+    	    		for(int j = 0; j < BS; ++j) {
+    	    			cobb(0,    i+1,  j+1 );
+    	    			cobb(BS+1, i+1,  j+1 );
+    	    			cobb(i+1,  0,    j+1 );
+    	    			cobb(i+1,  BS+1, j+1 );
+    	    			cobb(i+1,  j+1,  0   );
+    	    			cobb(i+1,  j+1,  BS+1);
+    	    		}
+*/
+    		}
+    	}
+    	new Helper().g();
+    }
+    
     @Override
     protected void genDecorations(BiomeGenBase p_150513_1_)
     {
@@ -129,6 +182,8 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
             i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
             this.lanternGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
         }
+        
+        tommyGeneration(this.currentWorld, this.chunk_X, this.chunk_Z, this.randomGenerator);
         
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
     }

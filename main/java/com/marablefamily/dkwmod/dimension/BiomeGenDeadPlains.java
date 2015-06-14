@@ -14,6 +14,7 @@ import java.util.Random;
 
 import com.marablefamily.dkwmod.DKWMod;
 import com.marablefamily.dkwmod.block.CorruptSoil;
+import com.marablefamily.dkwmod.mobs.EntitySoul;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -80,9 +81,7 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
     	// CREATURE SPAWNING
 		
 		// MONSTER SPAWNING
-		this.addMonsterSpawn(EntitySpider.class, 100, 4, 4);
-		this.addMonsterSpawn(EntityZombie.class, 100, 4, 4);
-		this.addMonsterSpawn(EntitySkeleton.class, 100, 4, 4);
+		this.addMonsterSpawn(EntitySoul.class, 100, 4, 7);
 		
 		// WRAP-UP CODE (DO NOT EDIT!)
 		this.setHeight(new BiomeGenBase.Height(heightBase, heightVariation));
