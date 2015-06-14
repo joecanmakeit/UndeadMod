@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import com.marablefamily.dkwmod.DKWMod;
 import com.marablefamily.dkwmod.block.CorruptSoil;
+import com.marablefamily.dkwmod.block.CorruptStone;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,14 +21,15 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderDeath extends WorldProvider {
 	
-	public static Block baseBlock = Blocks.stone;
+	public static Block baseBlock = CorruptStone.instance;
 	public static float daySpeed = 1.0F;
 	public static String colorFog = "#777788";
 	public static String colorSky = "#999999";
 	public static String colorSunriseSunset = "#000088";
 	
 	private static BiomeGenBase[] allowedBiomes = {
-		DKWMod.deadPlains
+		DKWMod.deadPlains,
+		DKWMod.deadOcean
 	};
 
 	@Override
