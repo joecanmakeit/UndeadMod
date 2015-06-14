@@ -29,8 +29,8 @@ public class WorldChunkManagerDeath extends WorldChunkManager {
 	{
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
-		this.biomesToSpawnIn.add(BiomeGenBase.beach);
-		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed, allowedBiomes, 5);
+		this.biomesToSpawnIn.add(DKWMod.deadPlains);
+		GenLayer[] agenlayer = MyGenLayer.makeTheWorld(seed, allowedBiomes, 3);
 		this.genBiomes = agenlayer[0];
 		this.biomeIndexLayer = agenlayer[1];
 	}

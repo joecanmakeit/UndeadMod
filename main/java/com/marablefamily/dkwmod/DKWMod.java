@@ -50,6 +50,7 @@ public class DKWMod {
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
 	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
+	public static BiomeGenDeadOcean deadOcean = new BiomeGenDeadOcean(biomeId++, Blocks.stone);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -61,7 +62,6 @@ public class DKWMod {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
-		BiomeManager.addBiome(BiomeType.ICY, new BiomeEntry(deadPlains, 0));
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 	}

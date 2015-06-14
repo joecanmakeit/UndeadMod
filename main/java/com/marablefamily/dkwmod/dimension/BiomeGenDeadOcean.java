@@ -40,13 +40,13 @@ public class BiomeGenDeadOcean extends BiomeGenBase {
 		BiomeDecoratorDeath decorator = (BiomeDecoratorDeath)theBiomeDecorator;
 		this.spawnableMonsterList = new ArrayList();
         this.spawnableCreatureList = new ArrayList();
-        this.setBiomeName("DeadPlains");
+        this.setBiomeName("DeadOcean");
 
 		// BASICS
 		this.topBlock = CorruptSoil.instance;
 		this.fillerBlock = CorruptSoil.instance;
-		this.heightBase = 1.5F;
-		this.heightVariation = 3.0F;
+		this.heightBase = -1.5F;
+		this.heightVariation = 1.0F;
 		this.enableSnow = false;
 		this.grassColor = 0x222222;
 		this.foliageColor = 0x111111;

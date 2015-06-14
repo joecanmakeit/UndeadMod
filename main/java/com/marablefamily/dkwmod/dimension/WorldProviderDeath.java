@@ -27,7 +27,8 @@ public class WorldProviderDeath extends WorldProvider {
 	public static String colorSunriseSunset = "#000088";
 	
 	private static BiomeGenBase[] allowedBiomes = {
-		DKWMod.deadPlains
+		DKWMod.deadPlains,
+		DKWMod.deadOcean
 	};
 
 	@Override
