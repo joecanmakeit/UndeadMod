@@ -46,7 +46,7 @@ public class WorldProviderDeath extends WorldProvider {
 	
 	protected void generateLightBrightnessTable()
     {
-        float f = 0.2F;
+        float f = 0.0F;
 
         for (int i = 0; i <= 15; ++i)
         {
