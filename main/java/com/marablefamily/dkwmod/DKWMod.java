@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.marablefamily.dkwmod.block.CorruptSoil;
+import com.marablefamily.dkwmod.block.CorruptStone;
 import com.marablefamily.dkwmod.dimension.*;
 
 import net.minecraft.block.Block;
@@ -49,13 +50,14 @@ public class DKWMod {
 	public static int deathWorldId = -2;
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
-	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, Blocks.stone);
-	public static BiomeGenDeadOcean deadOcean = new BiomeGenDeadOcean(biomeId++, Blocks.stone);
+	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, CorruptStone.instance);
+	public static BiomeGenDeadOcean deadOcean = new BiomeGenDeadOcean(biomeId++, CorruptStone.instance);
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		GameRegistry.registerItem(tpDeath, "tpDeath");
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
+		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
 	}
 
 	@EventHandler
