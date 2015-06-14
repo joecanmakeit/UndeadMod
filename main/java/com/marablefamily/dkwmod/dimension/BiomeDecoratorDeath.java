@@ -61,12 +61,14 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
     public int underwaterSandPerChunk;
     public int underwaterGravelPerChunk;
     public int boneShrubPerChunk;
-    
+
     private WorldGenSphere sphereGen;
+    private WorldGenObelisk obeliskGen;
 	
     public BiomeDecoratorDeath(Block base)
     {
     	this.sphereGen = new WorldGenSphere();
+    	this.obeliskGen = new WorldGenObelisk();
     } 
  
     @Override
@@ -114,6 +116,14 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
             l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
             this.sphereGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
+        }
+
+        doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, CACTUS);
+        if (this.randomGenerator.nextDouble() < 1) {
+            k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            i1 = this.currentWorld.getHeightValue(k, l);
+            this.obeliskGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
         }
         
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
