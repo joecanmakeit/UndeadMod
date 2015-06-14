@@ -75,6 +75,7 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		decorator.addOreSpawn(Blocks.obsidian, 16, 40, 0, 256, base, DIRT);
 		//decorator.addOreSpawn(Blocks.wool, 64, 5, 0, 256, base, DIRT);
 		decorator.boneShrubPerChunk = 10;
+		decorator.lanternPerChunk = 10;
 
     	// CREATURE SPAWNING
 		

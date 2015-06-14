@@ -65,6 +65,7 @@ public class DKWMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
+		GameRegistry.registerWorldGenerator(new DeathGenerator(), 1000);
 		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
