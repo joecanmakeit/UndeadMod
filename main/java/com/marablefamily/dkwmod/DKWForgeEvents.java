@@ -26,6 +26,14 @@ public class DKWForgeEvents {
 	}
 	
 	@SubscribeEvent
+	public void onLivingEntityDeath(LivingDeathEvent e) {
+		//System.out.println("death");
+		if (e.entityLiving instanceof EntityPlayer) {
+			System.out.println("player death");
+		}
+	}
+	
+	@SubscribeEvent
 	public void onFog(FogDensity e) {
 		if (e.entity.dimension == DKWMod.deathWorldId) {
 			e.setCanceled(true);
