@@ -31,10 +31,16 @@ public class DeathGenerator implements IWorldGenerator {
 		int k;
 		int l;
 		int i1;
-        if (random.nextDouble() < 0.5) {
-            k = chunkX + random.nextInt(16) + 8;
-            l = chunkZ + random.nextInt(16) + 8;
-            this.obsidianSpikeGen.generate(world, random, k, world.getTopSolidOrLiquidBlock(k, l), l);
+        if (random.nextDouble() < 0.04) {
+        	k = chunkX + random.nextInt(64) - 32;
+            l = chunkZ + random.nextInt(64) - 32;
+        	double more;
+        	do {
+	            this.obsidianSpikeGen.generate(world, random, k, 255, l);
+	            k += random.nextInt(64) - 32;
+	            l += random.nextInt(64) - 32;
+	            more = random.nextFloat();
+        	} while (more < 0.3);
         }
 	}
 	

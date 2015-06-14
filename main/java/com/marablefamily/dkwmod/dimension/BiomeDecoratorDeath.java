@@ -118,14 +118,6 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
         if (this.randomGenerator.nextDouble() < 1) {
             k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-            i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
-            this.sphereGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
-        }
-
-        doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, CACTUS);
-        if (this.randomGenerator.nextDouble() < 1) {
-            k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-            l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             i1 = this.currentWorld.getHeightValue(k, l);
             this.obeliskGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
         }

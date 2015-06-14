@@ -29,6 +29,7 @@ public class WorldProviderDeath extends WorldProvider {
 	
 	private static BiomeGenBase[] allowedBiomes = {
 		DKWMod.deadPlains,
+		DKWMod.deadPlains,
 		DKWMod.deadOcean
 	};
 
@@ -53,6 +54,7 @@ public class WorldProviderDeath extends WorldProvider {
             float f1 = 1.0F - (float)i / 15.0F;
             this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
         }
+        this.lightBrightnessTable[0] = 0.0F;
     }
 	
 	@Override
