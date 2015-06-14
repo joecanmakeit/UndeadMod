@@ -10,13 +10,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
 
 public class WorldProviderDeath extends WorldProvider {
@@ -237,4 +240,32 @@ public class WorldProviderDeath extends WorldProvider {
 		return new ChunkProviderDeath(worldObj, worldObj.getSeed(), true, baseBlock);
 	}
 
+	// Spawn point management
+
+	/**
+     * Will check if the x, z position specified is alright to be set as the map spawn point
+     */
+    public boolean canCoordinateBeSpawn(int p_76566_1_, int p_76566_2_)
+    {
+        return this.worldObj.getTopBlock(p_76566_1_, p_76566_2_) == Blocks.water;
+    }
+    
+    /**
+     * Gets the hard-coded portal location to use when entering this dimension.
+     */
+    public ChunkCoordinates getEntrancePortalLocation()
+    {
+        return getSpawnPoint();
+    }
+	
+	/**
+     * Determines the dimension the player will be respawned in, typically this brings them back to the overworld.
+     * 
+     * @param player The player that is respawning
+     * @return The dimension to respawn the player in
+     */
+    public int getRespawnDimension(EntityPlayerMP player)
+    {
+        return -2;
+    }
 }

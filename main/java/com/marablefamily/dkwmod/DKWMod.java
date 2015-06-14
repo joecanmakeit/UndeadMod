@@ -8,6 +8,7 @@ import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.block.CorruptStone;
 import com.marablefamily.dkwmod.dimension.*;
+import com.marablefamily.dkwmod.mobs.MobRegistration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -60,6 +61,7 @@ public class DKWMod {
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
 		GameRegistry.registerBlock(BoneShrub.instance, "boneShrub");
+		MobRegistration.mainRegistration(this);
 	}
 
 	@EventHandler
@@ -69,10 +71,12 @@ public class DKWMod {
 		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
+		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
+		
+		DimensionManager.getWorld(0).getGameRules().setOrCreateGameRule("keepInventory", "true");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
 	}
 }
