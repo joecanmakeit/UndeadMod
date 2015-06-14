@@ -183,7 +183,7 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
             this.lanternGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
         }
         
-        tommyGeneration(this.currentWorld, this.chunk_X, this.chunk_Z, this.randomGenerator);
+        //tommyGeneration(this.currentWorld, this.chunk_X, this.chunk_Z, this.randomGenerator);
         
         MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(currentWorld, randomGenerator, chunk_X, chunk_Z));
     }
