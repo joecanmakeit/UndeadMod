@@ -8,6 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Items;
@@ -19,9 +20,9 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntitySoul extends EntityFlying {
+public class EntitySoul extends EntityFlying implements IMob {
 	
-	public static double sightRange = 32.0;
+	public static double sightRange = 8.0;
     private boolean rising = true;
     private int risingTimer = 50;
     private Entity targetedEntity;
@@ -30,7 +31,7 @@ public class EntitySoul extends EntityFlying {
     public double waypointY;
     public double waypointZ;
     public int courseChangeCooldown;
-    private double speed = 0.05;
+    private double speed = 0.02;
     
 	public EntitySoul(World w) {
 		super(w);
@@ -103,7 +104,7 @@ public class EntitySoul extends EntityFlying {
 
         if (this.targetedEntity == null || this.aggroCooldown-- <= 0)
         {
-            this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
+            this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, sightRange);
 
             if (this.targetedEntity != null)
             {
