@@ -17,6 +17,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.WorldSettings.GameType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -258,6 +259,12 @@ public class WorldProviderDeath extends WorldProvider {
         return getSpawnPoint();
     }
 	
+
+    public ChunkCoordinates getRandomizedSpawnPoint()
+    {
+        return new ChunkCoordinates(this.worldObj.getSpawnPoint());
+    }
+    
 	/**
      * Determines the dimension the player will be respawned in, typically this brings them back to the overworld.
      * 
