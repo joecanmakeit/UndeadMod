@@ -18,6 +18,10 @@ public class CorruptStone extends BlockStone {
 		this.setBlockName("corruptStone");
 		this.setBlockTextureName("dkwmod:corruptStone");
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setHardness(2.0F);
+		this.setResistance(30.0F);
+		this.setStepSound(Block.soundTypeStone);
+		this.setHarvestLevel("pickaxe", 1);
 	}
 
 }
