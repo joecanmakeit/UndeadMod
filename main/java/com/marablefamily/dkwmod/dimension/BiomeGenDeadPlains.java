@@ -81,7 +81,7 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
     	// CREATURE SPAWNING
 		
 		// MONSTER SPAWNING
-		this.addMonsterSpawn(EntitySoul.class, 100, 4, 7);
+		this.addMonsterSpawn(EntitySoul.class, 100, 1, 1);
 		
 		// WRAP-UP CODE (DO NOT EDIT!)
 		this.setHeight(new BiomeGenBase.Height(heightBase, heightVariation));
