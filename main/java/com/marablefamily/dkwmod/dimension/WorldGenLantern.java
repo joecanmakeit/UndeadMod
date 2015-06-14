@@ -57,7 +57,7 @@ public class WorldGenLantern extends WorldGenerator {
 		int i, j, k;
 		
 		for (i = -1; i <= 1; ++i) {
-			for (j = -3; j <= -1; ++j) {
+			for (j = -3; j <= 0; ++j) {
 				for (k = -1; k <= 1; ++k) {
 					if (!world.isAirBlock(x + i, y + j, z + k)) return false;
 				}
@@ -111,10 +111,13 @@ public class WorldGenLantern extends WorldGenerator {
 		for (i = -1; i <= 1; ++i) {
 			for (j = -3; j <= -1; ++j) {
 				for (k = -1; k <= 1; ++k) {
-					if (i == 0 && k == 0 && j == -2) world.setBlock(x + i, y + j, z + k, Blocks.glowstone, 0, 2);
+					if (i == 0 && k == 0 && j == -2) continue;
 					else world.setBlock(x + i,y + j,z + k,Blocks.stained_glass, lanternColor, 2);
 				}
 			}
 		}
+		
+		// Light
+		world.setBlock(x, y - 2, z, Blocks.glowstone);
 	}
 }
