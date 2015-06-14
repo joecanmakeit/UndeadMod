@@ -13,7 +13,7 @@ public class EntitySoul extends EntityMob {
 
 	public EntitySoul(World w) {
 		super(w);
-		this.setSize(1.0F, 1.0F);
+		this.setSize(0.5F, 1.0F);
 	}
 	
 	protected Entity findPlayerToAttack()
