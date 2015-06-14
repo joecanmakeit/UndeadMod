@@ -86,7 +86,7 @@ public class CorruptSoil extends Block {
     			world.setBlock(x, y, z, Blocks.air, 0, 2);
     	}
     	
-    	this.timer = 20000;
+    	this.timer = 1;
     	this.direction = (this.direction+1) % 6;
     	this.currentlySpreading = !this.currentlySpreading;
     }
