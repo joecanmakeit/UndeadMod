@@ -54,6 +54,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
 
 public class BiomeDecoratorDeath extends BiomeDecorator {
 
