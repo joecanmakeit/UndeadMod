@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.block.CorruptStone;
 import com.marablefamily.dkwmod.dimension.*;
@@ -58,6 +59,7 @@ public class DKWMod {
 		GameRegistry.registerItem(tpDeath, "tpDeath");
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
+		GameRegistry.registerBlock(BoneShrub.instance, "boneShrub");
 	}
 
 	@EventHandler

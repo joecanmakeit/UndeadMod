@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.marablefamily.dkwmod.DKWMod;
+import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.dimension.MyBiomeDecorator.Ore;
 
 import net.minecraft.block.Block;
@@ -59,6 +60,7 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
 	public ArrayList<Ore> oreGenList = new ArrayList<Ore>();
     public int underwaterSandPerChunk;
     public int underwaterGravelPerChunk;
+    public int boneShrubPerChunk;
     
     private WorldGenSphere sphereGen;
 	
@@ -98,21 +100,12 @@ public class BiomeDecoratorDeath extends BiomeDecorator {
         int i1;
 
         boolean doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, DEAD_BUSH);
-        for (j = 0; doGen && j < this.deadBushPerChunk; ++j)
+        for (j = 0; doGen && j < this.boneShrubPerChunk; ++j)
         {
             k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
-           // (new WorldGenDeadBush(Blocks.deadbush)).generate(this.currentWorld, this.randomGenerator, k, i1, l);
-        }
-
-        doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, CACTUS);
-        for (j = 0; doGen && j < this.cactiPerChunk; ++j)
-        {
-            k = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-            l = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-            i1 = nextInt(this.currentWorld.getHeightValue(k, l) * 2);
-            //this.cactusGen.generate(this.currentWorld, this.randomGenerator, k, i1, l);
+            (new WorldGenDeadBush(BoneShrub.instance)).generate(this.currentWorld, this.randomGenerator, k, i1, l);
         }
 
         doGen = TerrainGen.decorate(currentWorld, randomGenerator, chunk_X, chunk_Z, CACTUS);
