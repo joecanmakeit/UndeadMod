@@ -2,6 +2,7 @@ package com.marablefamily.dkwmod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -19,6 +20,8 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.ChunkProviderServer;
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

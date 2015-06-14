@@ -72,8 +72,6 @@ public class DKWMod {
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
-		
-		DimensionManager.getWorld(0).getGameRules().setOrCreateGameRule("keepInventory", "true");
 	}
 
 	@EventHandler
