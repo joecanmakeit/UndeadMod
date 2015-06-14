@@ -32,14 +32,6 @@ public class RenderSoul extends RenderLiving {
         return this.getEntityTexture((EntitySoul)p_110775_1_);
     }
 	
-	@Override
-	public void doRender(EntityLiving entityLiving, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
-		float bob = (float) (Math.sin((float)entityLiving.getAge()*bobSpeed)*maxBob);
-		GL11.glTranslatef(0.0F, bob, 0.0F);
-		super.doRender(entityLiving, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
-		GL11.glTranslatef(0.0F, -bob, 0.0F);
-	}
-	
 	protected void fall(float p_70069_1_) {}
 
 }
