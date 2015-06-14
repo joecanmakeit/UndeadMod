@@ -58,6 +58,7 @@ public class BiomeGenDeadOcean extends BiomeGenBase {
 		decorator.addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, DIRT);
 		decorator.addOreSpawn(Blocks.obsidian, 16, 40, 0, 256, base, DIRT);
 		decorator.boneShrubPerChunk = 0;
+		decorator.lanternPerChunk = 0;
 		
 		// WRAP-UP CODE (DO NOT EDIT!)
 		this.setHeight(new BiomeGenBase.Height(heightBase, heightVariation));
