@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.marablefamily.dkwmod.dimension.MyTeleporter;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -24,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
@@ -48,12 +52,23 @@ public class DKWFMLEvents {
 	
 	HashMap<String, ExtraPlayerState> extraPlayerState = new HashMap<String, ExtraPlayerState>();
 	
+	int deathTargetDimension = -2;
+	
 	@SubscribeEvent
 	public void onPlayerRespawn(PlayerRespawnEvent e) {		
-		if (e.player.dimension != -2) {
-			e.player.travelToDimension(-2);
+		if (e.player.dimension != deathTargetDimension) {
+			FMLCommonHandler.instance()
+				.getMinecraftServerInstance()
+				.getConfigurationManager()
+				.transferPlayerToDimension(
+						(EntityPlayerMP)e.player, 
+						deathTargetDimension, 
+						new MyTeleporter(
+								MinecraftServer.getServer()
+								.worldServerForDimension(deathTargetDimension)));
 			
-			
+			ChunkCoordinates c = MinecraftServer.getServer().worldServerForDimension(deathTargetDimension).getSpawnPoint();
+			e.player.setPosition(c.posX, c.posY, c.posZ);
 		}
 	}
 	
