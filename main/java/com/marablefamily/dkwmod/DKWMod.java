@@ -71,10 +71,12 @@ public class DKWMod {
 		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
+		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
+		
+		DimensionManager.getWorld(0).getGameRules().setOrCreateGameRule("keepInventory", "true");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
 	}
 }
