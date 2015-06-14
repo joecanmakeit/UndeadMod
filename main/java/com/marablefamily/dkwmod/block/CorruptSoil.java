@@ -16,6 +16,31 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class CorruptSoil extends Block {
 	public static CorruptSoil instance;
 	
+	private int timer = 1;
+	private boolean currentlySpreading = false;
+	private int direction = 0;
+	private static int dirX(int dir) {
+		switch(dir) {
+		case 0:  return -1;
+		case 1:  return 1;
+		default: return 0;
+		}
+	}
+	private static int dirY(int dir) {
+		switch(dir) {
+		case 2:  return -1;
+		case 3:  return 1;
+		default: return 0;
+		}
+	}
+	private static int dirZ(int dir) {
+		switch(dir) {
+		case 4:  return -1;
+		case 5:  return 1;
+		default: return 0;
+		}
+	}
+	
 	static {
 		instance = new CorruptSoil();
 	}
@@ -27,7 +52,7 @@ public class CorruptSoil extends Block {
 		this.setBlockTextureName("myassets:corruptsoil");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setHardness(0.8F);
-		this.setTickRandomly(false);
+		this.setTickRandomly(true);
 	}
 	
 	/**
@@ -45,9 +70,27 @@ public class CorruptSoil extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
-	/*
     public void updateTick(World world, int x, int y, int z, Random r) {
-
+		--this.timer;
+    	if(this.timer > 0)
+    		return;
+    	
+    	int nx = x + dirX(this.direction);
+    	int ny = y + dirY(this.direction);
+    	int nz = z + dirZ(this.direction);
+    	if(world.getBlock(nx, ny, nz) == Blocks.air) {
+    		if(this.currentlySpreading)
+    			world.setBlock(nx, ny, nz, instance, 0, 2);
+    		else
+    			world.setBlock(x, y, z, Blocks.air, 0, 2);
+    	}
+    	
+    	this.timer = 20;
+    	this.direction = (this.direction+1) % 6;
+    	this.currentlySpreading = !this.currentlySpreading;
+    	
+    	if(true) return;
+    	
     	if (r.nextDouble() > 0.8) {
 	    	double corruptionPulse = Math.sin((double)world.getWorldTime() * 0.001) * 0.5 + 0.5;
 	    	
@@ -62,7 +105,6 @@ public class CorruptSoil extends Block {
 	    	}
     	}
     }
-    */
     
     private int countAdjacentBlocks(World world, int x, int y, int z, Block blockType) {
     	int count = 0;
