@@ -49,7 +49,7 @@ public class CorruptSoil extends Block {
 		super(Material.ground);
 		
 		this.setBlockName("corruptSoil");
-		this.setBlockTextureName("myassets:corruptsoil");
+		this.setBlockTextureName("dkwmod:corruptsoil");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setHardness(0.8F);
 		this.setTickRandomly(true);

@@ -61,8 +61,8 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
 		// BASICS
 		this.topBlock = CorruptSoil.instance;
 		this.fillerBlock = CorruptSoil.instance;
-		this.heightBase = 1.5F;
-		this.heightVariation = 3.0F;
+		this.heightBase = 1.0F;
+		this.heightVariation = 2.0F;
 		this.enableSnow = false;
 		this.grassColor = 0x222222;
 		this.foliageColor = 0x111111;
@@ -73,6 +73,7 @@ public class BiomeGenDeadPlains extends BiomeGenBase {
         // ORE SPAWNING
 		decorator.addOreSpawn(Blocks.obsidian, 32, 20, 0, 256, base, DIRT);
 		decorator.addOreSpawn(Blocks.obsidian, 16, 40, 0, 256, base, DIRT);
+		//decorator.addOreSpawn(Blocks.wool, 64, 5, 0, 256, base, DIRT);
 
     	// CREATURE SPAWNING
 		

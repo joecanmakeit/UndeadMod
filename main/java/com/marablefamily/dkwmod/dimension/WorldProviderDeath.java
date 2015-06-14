@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import com.marablefamily.dkwmod.DKWMod;
 import com.marablefamily.dkwmod.block.CorruptSoil;
+import com.marablefamily.dkwmod.block.CorruptStone;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,7 +28,8 @@ public class WorldProviderDeath extends WorldProvider {
 	public static String colorSunriseSunset = "#000088";
 	
 	private static BiomeGenBase[] allowedBiomes = {
-		DKWMod.deadPlains
+		DKWMod.deadPlains,
+		DKWMod.deadOcean
 	};
 
 	@Override
