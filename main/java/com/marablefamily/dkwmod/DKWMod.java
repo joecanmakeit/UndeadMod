@@ -8,6 +8,7 @@ import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.block.CorruptStone;
 import com.marablefamily.dkwmod.dimension.*;
+import com.marablefamily.dkwmod.mobs.MobRegistration;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -60,6 +61,7 @@ public class DKWMod {
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
 		GameRegistry.registerBlock(BoneShrub.instance, "boneShrub");
+		MobRegistration.mainRegistration(this);
 	}
 
 	@EventHandler
