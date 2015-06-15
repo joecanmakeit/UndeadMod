@@ -25,7 +25,7 @@ public class EntitySoul extends EntityFlying implements IMob {
 	public static double sightRange = 20.0;
     private boolean rising = true;
     private int risingTimer = 50;
-    private Entity targetedEntity;
+    public Entity targetedEntity;
     private int aggroCooldown = 0;
     public double waypointX;
     public double waypointY;

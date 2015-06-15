@@ -3,6 +3,7 @@ package com.marablefamily.dkwmod.mobs;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelSoul extends ModelBase {
 	
@@ -60,9 +61,27 @@ public class ModelSoul extends ModelBase {
 	    leftarm.render(f5);
 	  }
 	
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e)
-    {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
-    }
+	  private float range = 0.2F;
+		public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e)
+		{
+			super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
+			this.head.rotateAngleX = ((EntitySoul)e).targetedEntity == null ? 0.78F : 0.3F;
+		    this.rightarm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * range - (range/2);
+		    this.leftarm.rotateAngleX = -(MathHelper.sin(f2 * 0.067F) * range - (range/2));
+		    
+		    /*
+	        float f6 = MathHelper.sin(this.onGround * (float)Math.PI);
+	        float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float)Math.PI);
+	        this.rightarm.rotateAngleX = 0.0F;
+	        this.rightarm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
+	        this.rightarm.rotateAngleZ += MathHelper.cos(f3 * 0.09F) * 0.05F + 0.05F;
+	        this.rightarm.rotateAngleX += MathHelper.sin(f3 * 0.067F) * 0.05F;
+	        this.leftarm.rotateAngleX = 0.0F;
+	        this.leftarm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
+	        this.leftarm.rotateAngleZ -= MathHelper.cos(f3 * 0.09F) * 0.05F + 0.05F;
+	        this.leftarm.rotateAngleX -= MathHelper.sin(f3 * 0.067F) * 0.05F;
+	        */
+			
+		}
 
 }
