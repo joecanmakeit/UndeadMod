@@ -49,6 +49,8 @@ public class DKWMod {
 	@SidedProxy(clientSide="com.marablefamily.dkwmod.client.ClientProxy", serverSide="com.marablefamily.dkwmod.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static Item climbingClaws = new Item().setUnlocalizedName("climbingClaws").setCreativeTab(CreativeTabs.tabTools).setTextureName("dkwmod:climbingClaws");
+	
 	public static int deathWorldId = -2;
 	public static int biomeId = 50;
 	public static MyTeleporterItem tpDeath = new MyTeleporterItem("tpDeath", deathWorldId);
@@ -61,6 +63,7 @@ public class DKWMod {
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
 		GameRegistry.registerBlock(BoneShrub.instance, "boneShrub");
+		GameRegistry.registerItem(climbingClaws, "climbingClaws");
 		MobRegistration.mainRegistration(this);
 	}
 

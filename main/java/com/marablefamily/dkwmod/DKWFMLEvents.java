@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -162,6 +163,7 @@ public class DKWFMLEvents {
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent e) {
 		if (!e.player.worldObj.isRemote && e.phase == e.phase.END) {
+			
 			String name = e.player.getCommandSenderName();
 
 			if (!extraPlayerState.containsKey(name)) {
