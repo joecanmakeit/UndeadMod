@@ -82,6 +82,7 @@ public class DKWFMLEvents {
 		if(w.isRemote)
 			return;
 		
+/*
 		List chunks = ((ChunkProviderServer) w.getChunkProvider()).loadedChunks;
 		int len = chunks.size();
 		
@@ -108,6 +109,7 @@ public class DKWFMLEvents {
 			if(w.getBlock(x,y,z) == CorruptSoil.instance)
 				CorruptSoil.instance.updateTick(w, x, y, z, random);
 		}
+*/
 	}
 
 	@SubscribeEvent
