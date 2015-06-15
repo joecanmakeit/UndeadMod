@@ -24,6 +24,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class DKWForgeEvents {
 	
 	HashMap<String, Double> lastClimb = new HashMap<String, Double>();
+	ArrayList<String> toRemoveFallDist = new ArrayList<String>();
 
 	@SubscribeEvent
 	public void onPlayerClick(PlayerInteractEvent e) {
@@ -40,30 +41,25 @@ public class DKWForgeEvents {
 	
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent e) {
-		if (e.entityLiving instanceof EntityPlayer && e.entityLiving.isCollidedHorizontally) {
-			ItemStack held = ((EntityPlayer)e.entityLiving).getCurrentEquippedItem();
-			if (held != null && held.getItem() == DKWMod.climbingClaws) {
-				if (e.entityLiving.motionY < -0.05) {
-					e.entityLiving.motionY = -0.05;
-					e.entityLiving.motionX *= 0.3F;
-					e.entityLiving.motionZ *= 0.3F;
-					String name = ((EntityPlayer)e.entityLiving).getCommandSenderName();
-					lastClimb.put(name, e.entityLiving.posY);
-					e.entityLiving.onGround = true;
-				}
+		if (e.entityLiving instanceof EntityPlayer) {
+			String name = ((EntityPlayer)e.entityLiving).getCommandSenderName();
+			
+			if (!e.entityLiving.worldObj.isRemote && toRemoveFallDist.contains(name) ) {
+				e.entityLiving.fallDistance = 0.0F;
+				toRemoveFallDist.remove(name);
 			}
 			
-			//System.out.println("COLLIDING! " + e.entityLiving.worldObj.isRemote + " " + e.entityLiving.getAge());
-		}
-	}
-	
-	@SubscribeEvent
-	public void onPlayerFall(LivingFallEvent e) {
-		if (!e.entityLiving.worldObj.isRemote && e.entityLiving instanceof EntityPlayer) {
-			String name = ((EntityPlayer)e.entityLiving).getCommandSenderName(); 
-			if (lastClimb.containsKey(name) && lastClimb.get(name) > -1) {
-				e.distance = (float) (lastClimb.get(name) - e.entityLiving.posY) - 2.0F;
-				lastClimb.put(name, -2.0);
+			if (e.entityLiving.isCollidedHorizontally) {
+				ItemStack held = ((EntityPlayer)e.entityLiving).getCurrentEquippedItem();
+				if (held != null && held.getItem() == DKWMod.climbingClaws) {
+					if (e.entityLiving.motionY < -0.05) {
+						e.entityLiving.motionY = -0.05;
+						e.entityLiving.motionX *= 0.3F;
+						e.entityLiving.motionZ *= 0.3F;
+						e.entityLiving.onGround = true;
+						toRemoveFallDist.add(name);
+					}
+				}
 			}
 		}
 	}
