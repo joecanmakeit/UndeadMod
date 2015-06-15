@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public class EntitySoul extends EntityFlying implements IMob {
 	
-	public static double sightRange = 8.0;
+	public static double sightRange = 20.0;
     private boolean rising = true;
     private int risingTimer = 50;
     private Entity targetedEntity;
@@ -31,7 +31,7 @@ public class EntitySoul extends EntityFlying implements IMob {
     public double waypointY;
     public double waypointZ;
     public int courseChangeCooldown;
-    private double speed = 0.02;
+    private double speed = 0.03;
     
 	public EntitySoul(World w) {
 		super(w);
