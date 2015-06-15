@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.dimension.MyTeleporter;
 
 import net.minecraft.block.Block;
@@ -82,28 +83,36 @@ public class DKWFMLEvents {
 		if(w.isRemote)
 			return;
 		
+/*
 		List chunks = ((ChunkProviderServer) w.getChunkProvider()).loadedChunks;
 		int len = chunks.size();
 		
 		if(len <= 0)
 			return;
 		
+		int base = random.nextInt(len);
 		//TODO: Tweak probability distribution of this randomness ...
-		for(int i=0; i<len; ++i) {
-			Chunk chunk = (Chunk) chunks.get(i);
+		for(int i=0; i<len/4; ++i) {
+			Chunk chunk = (Chunk) chunks.get((i+base) % len);
 			
 			int x = 16 * chunk.xPosition + random.nextInt(16);
 			int y = random.nextInt(100);  // Does this need tweaking???
 			int z = 16 * chunk.zPosition + random.nextInt(16);
 			
-			//TODO: use some criterion other than "air" and "not air"
+			// Cause the world to crumble
+			// TODO: use some criterion other than "air" and "not air"
 			if(w.getBlock(x,y,z) == Blocks.air  &&  w.getBlock(x,y+1,z) != Blocks.air) {
 //				System.out.println(x + " " + y + " " + z + " " + len);  //debug
 				w.setBlock(x,y+1,z,Blocks.sand);  //TODO: don't replace the block with sand ...
 			}
+			
+			// Move the corrupt soil
+			if(w.getBlock(x,y,z) == CorruptSoil.instance)
+				CorruptSoil.instance.updateTick(w, x, y, z, random);
 		}
+*/
 	}
-	
+
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent e) {
 		
