@@ -45,8 +45,8 @@ public class DKWForgeEvents {
 			if (held != null && held.getItem() == DKWMod.climbingClaws) {
 				if (e.entityLiving.motionY < -0.05) {
 					e.entityLiving.motionY = -0.05;
-					e.entityLiving.motionX *= 0.7F;
-					e.entityLiving.motionZ *= 0.7F;
+					e.entityLiving.motionX *= 0.3F;
+					e.entityLiving.motionZ *= 0.3F;
 					String name = ((EntityPlayer)e.entityLiving).getCommandSenderName();
 					lastClimb.put(name, e.entityLiving.posY);
 					e.entityLiving.onGround = true;
