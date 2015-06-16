@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.marablefamily.dkwmod.DKWForgeEvents.StopFallHandler;
+import com.marablefamily.dkwmod.DKWForgeEvents.StopFallMessage;
 import com.marablefamily.dkwmod.block.BlockUrn;
 import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.block.CorruptSoil;
@@ -42,8 +44,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid="dkwmod", name="Death Knight World", version="0.1")
 public class DKWMod {
@@ -62,6 +67,8 @@ public class DKWMod {
 	public static BiomeGenDeadPlains deadPlains = new BiomeGenDeadPlains(biomeId++, CorruptStone.instance);
 	public static BiomeGenDeadOcean deadOcean = new BiomeGenDeadOcean(biomeId++, CorruptStone.instance);
 	
+	public static SimpleNetworkWrapper network;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
@@ -74,6 +81,9 @@ public class DKWMod {
 		GameRegistry.registerItem(climbingClaws, "climbingClaws");
 		GameRegistry.registerBlock(urn, "urn");
 		MobRegistration.mainRegistration(this);
+
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("StopFallChannel");
+		network.registerMessage(StopFallHandler.class, StopFallMessage.class, 0, Side.SERVER);
 	}
 
 	@EventHandler

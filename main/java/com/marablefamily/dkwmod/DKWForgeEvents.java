@@ -1,5 +1,7 @@
 package com.marablefamily.dkwmod;
 
+import io.netty.buffer.ByteBuf;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,15 +27,16 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class DKWForgeEvents {
 	
 	Random rand = new Random();
-	
-	HashMap<String, Double> lastClimb = new HashMap<String, Double>();
-	ArrayList<String> toRemoveFallDist = new ArrayList<String>();
 
 	@SubscribeEvent
 	public void onPlayerClick(PlayerInteractEvent e) {
@@ -48,14 +51,50 @@ public class DKWForgeEvents {
 		}
 	}
 	
+	public static class StopFallMessage implements IMessage {
+		private String name;
+		private float posY;
+
+		public StopFallMessage() {}
+		public StopFallMessage(String name, float y) {
+			this.name = name;
+			this.posY = y;
+		}
+
+		@Override
+		public void fromBytes(ByteBuf buf) {
+			this.posY = buf.readFloat();
+			this.name = ByteBufUtils.readUTF8String(buf);
+		}
+
+		@Override
+		public void toBytes(ByteBuf buf) {
+			buf.writeFloat(this.posY);
+			ByteBufUtils.writeUTF8String(buf, this.name);
+		}
+	}
+
+	public static class StopFallHandler implements IMessageHandler<StopFallMessage, IMessage> {
+		public static HashMap<String, Float> lastClimb = new HashMap<String, Float>();
+
+		@Override
+		public IMessage onMessage(StopFallMessage message, MessageContext ctx) {
+			lastClimb.put(message.name, message.posY);
+			return null; // no response in this case
+		}
+	}
+
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent e) {
 		if (e.entityLiving instanceof EntityPlayer) {
 			String name = ((EntityPlayer)e.entityLiving).getCommandSenderName();
 			
-			if (!e.entityLiving.worldObj.isRemote && toRemoveFallDist.contains(name) ) {
-				e.entityLiving.fallDistance = 0.0F;
-				toRemoveFallDist.remove(name);
+			if (!e.entityLiving.worldObj.isRemote && StopFallHandler.lastClimb.containsKey(name) ) {
+				float climbPos = StopFallHandler.lastClimb.get(name);
+				float dist = climbPos - (float) e.entity.posY;
+				if(dist < e.entityLiving.fallDistance)
+					e.entityLiving.fallDistance = dist;
+				StopFallHandler.lastClimb.remove(name);
 			}
 			
 			if (e.entityLiving.isCollidedHorizontally) {
@@ -66,7 +105,7 @@ public class DKWForgeEvents {
 						e.entityLiving.motionX *= 0.3F;
 						e.entityLiving.motionZ *= 0.3F;
 						e.entityLiving.onGround = true;
-						toRemoveFallDist.add(name);
+						DKWMod.network.sendToServer(new StopFallMessage(name, (float) e.entityLiving.posY));
 					}
 				}
 			}
