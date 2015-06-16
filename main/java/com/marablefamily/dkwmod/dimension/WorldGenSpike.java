@@ -9,29 +9,34 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenObsidianSpike extends WorldGenerator {
+public class WorldGenSpike extends WorldGenerator {
 
 	private static double minLen = 15.0F;
 	private static double maxLen = 60.0F;
 	private static double maxAng = Math.PI/4.0;
 	private static double minRad = 3.0F;
 	private static double maxRad = 5.0F;
+	private Block block = Blocks.obsidian;
+	
+	public WorldGenSpike(Block block) {
+		this.block = block;
+	}
 	
 	@Override
 	public boolean generate(World w, Random r, int x, int y, int z) {
-		Block block;
+		Block blockTest;
 
         do
         {
-            block = w.getBlock(x, y, z);
-            if (block == CorruptSoil.instance)
+        	blockTest = w.getBlock(x, y, z);
+            if (blockTest == CorruptSoil.instance)
             {
                 break;
             }
             --y;
         } while (y > 5);
 		y -= 5;
-		if (block != CorruptSoil.instance) return false;
+		if (blockTest != CorruptSoil.instance) return false;
 		
 		double xStep = Math.sin(-(2*maxAng*r.nextDouble()-maxAng));
 		double zStep = Math.sin(-(2*maxAng*r.nextDouble()-maxAng));
@@ -52,7 +57,7 @@ public class WorldGenObsidianSpike extends WorldGenerator {
 				int xT = (int)Math.floor(xCurr+xEdge);
 				int yT = (int)Math.floor(y+yCurr);
 				int zT = (int)Math.floor(zCurr+zEdge);
-				w.setBlock(xT, yT, zT, Blocks.obsidian, 0, 2);
+				w.setBlock(xT, yT, zT, block, 0, 2);
 			}
 		}
 		for (double yCurr = 0; yCurr > -rad*2; yCurr--) {
@@ -64,7 +69,7 @@ public class WorldGenObsidianSpike extends WorldGenerator {
 				int xT = (int)Math.floor(x+xEdge);
 				int yT = (int)Math.floor(y+yCurr);
 				int zT = (int)Math.floor(z+zEdge);
-				w.setBlock(xT, yT, zT, Blocks.obsidian, 0, 2);
+				w.setBlock(xT, yT, zT, block, 0, 2);
 			}
 		}
 		return true;

@@ -4,9 +4,11 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.marablefamily.dkwmod.block.BlockUrn;
 import com.marablefamily.dkwmod.block.BoneShrub;
 import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.block.CorruptStone;
+import com.marablefamily.dkwmod.block.TileEntityUrn;
 import com.marablefamily.dkwmod.dimension.*;
 import com.marablefamily.dkwmod.mobs.MobRegistration;
 
@@ -22,6 +24,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.src.FMLRenderAccessLibrary;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -48,8 +51,10 @@ public class DKWMod {
 	public static DKWMod instance;
 	@SidedProxy(clientSide="com.marablefamily.dkwmod.client.ClientProxy", serverSide="com.marablefamily.dkwmod.CommonProxy")
 	public static CommonProxy proxy;
+	public static String modID = "dkwmod";
 	
 	public static Item climbingClaws = new Item().setUnlocalizedName("climbingClaws").setCreativeTab(CreativeTabs.tabTools).setTextureName("dkwmod:climbingClaws");
+	public static Block urn = new BlockUrn(Material.ground).setBlockName("urn").setBlockTextureName("urn");
 	
 	public static int deathWorldId = -2;
 	public static int biomeId = 50;
@@ -67,6 +72,7 @@ public class DKWMod {
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
 		GameRegistry.registerBlock(BoneShrub.instance, "boneShrub");
 		GameRegistry.registerItem(climbingClaws, "climbingClaws");
+		GameRegistry.registerBlock(urn, "urn");
 		MobRegistration.mainRegistration(this);
 	}
 
@@ -74,6 +80,7 @@ public class DKWMod {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new DeathGenerator(), 1000);
+		GameRegistry.registerTileEntity(TileEntityUrn.class, "urn");
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
 	}

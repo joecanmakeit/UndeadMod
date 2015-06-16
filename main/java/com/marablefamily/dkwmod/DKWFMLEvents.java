@@ -78,8 +78,6 @@ public class DKWFMLEvents {
 			
 			ChunkCoordinates c = MinecraftServer.getServer().worldServerForDimension(deathTargetDimension).getSpawnPoint();
 			e.player.setPosition(c.posX, c.posY, c.posZ);
-			e.player.worldObj.spawnEntityInWorld(new EntityItem(e.player.worldObj, c.posX, c.posY, c.posZ, new ItemStack(DKWMod.climbingClaws)));
-			e.player.dropItem(DKWMod.climbingClaws, 1);
 		}
 	}
 	
