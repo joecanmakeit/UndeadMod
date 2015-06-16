@@ -20,6 +20,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class DKWForgeEvents {
 	
@@ -64,6 +66,7 @@ public class DKWForgeEvents {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onFog(FogDensity e) {
 		if (e.entity.dimension == DKWMod.deathWorldId) {

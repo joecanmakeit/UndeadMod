@@ -9,9 +9,10 @@ import com.marablefamily.dkwmod.block.CorruptSoil;
 import com.marablefamily.dkwmod.dimension.MyTeleporter;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
+//import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -47,6 +48,10 @@ public class DKWFMLEvents {
 	int maxRad = 7;
 	int timeToMax = 140;
 	
+	public DKWFMLEvents() {
+		
+	}
+	
 	Random random = new Random();
 	
 	class ExtraPlayerState {
@@ -73,6 +78,8 @@ public class DKWFMLEvents {
 			
 			ChunkCoordinates c = MinecraftServer.getServer().worldServerForDimension(deathTargetDimension).getSpawnPoint();
 			e.player.setPosition(c.posX, c.posY, c.posZ);
+			e.player.worldObj.spawnEntityInWorld(new EntityItem(e.player.worldObj, c.posX, c.posY, c.posZ, new ItemStack(DKWMod.climbingClaws)));
+			e.player.dropItem(DKWMod.climbingClaws, 1);
 		}
 	}
 	
@@ -111,11 +118,6 @@ public class DKWFMLEvents {
 				CorruptSoil.instance.updateTick(w, x, y, z, random);
 		}
 */
-	}
-
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent e) {
-		
 	}
 	
 	private void sendToDimension(Entity e, int dimension, Teleporter teleporter) {

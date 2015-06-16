@@ -59,6 +59,9 @@ public class DKWMod {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
+		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
+
 		GameRegistry.registerItem(tpDeath, "tpDeath");
 		GameRegistry.registerBlock(CorruptSoil.instance, "corruptSoil");
 		GameRegistry.registerBlock(CorruptStone.instance, "corruptStone");
@@ -71,10 +74,8 @@ public class DKWMod {
 	public void load(FMLInitializationEvent event) {
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new DeathGenerator(), 1000);
-		MinecraftForge.EVENT_BUS.register(new DKWForgeEvents());
 		DimensionManager.registerProviderType(deathWorldId, WorldProviderDeath.class, false);
 		DimensionManager.registerDimension(deathWorldId, deathWorldId);
-		FMLCommonHandler.instance().bus().register(new DKWFMLEvents());
 	}
 
 	@EventHandler

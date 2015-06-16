@@ -2,6 +2,8 @@ package com.marablefamily.dkwmod.mobs;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -12,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.util.ResourceLocation;
 
+@SideOnly(Side.CLIENT)
 public class RenderSoul extends RenderLiving {
 	
     private static final ResourceLocation soulTextures = new ResourceLocation("dkwmod:textures/entity/soul.png");

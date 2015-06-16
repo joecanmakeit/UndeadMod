@@ -1,10 +1,13 @@
 package com.marablefamily.dkwmod.mobs;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
+@SideOnly(Side.CLIENT)
 public class ModelSoul extends ModelBase {
 	
     ModelRenderer head;
