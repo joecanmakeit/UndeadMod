@@ -1,5 +1,7 @@
 package com.marablefamily.dkwmod.mobs;
 
+import com.marablefamily.dkwmod.DKWFMLEvents;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
@@ -22,7 +24,7 @@ import net.minecraft.world.World;
 
 public class EntitySoul extends EntityFlying implements IMob {
 	
-	public static double sightRange = 20.0;
+	public static double sightRange = 60.0;
     private boolean rising = true;
     private int risingTimer = 50;
     public Entity targetedEntity;
@@ -31,17 +33,81 @@ public class EntitySoul extends EntityFlying implements IMob {
     public double waypointY;
     public double waypointZ;
     public int courseChangeCooldown;
-    private double speed = 0.03;
+    private double speed = 0.1;
     
 	public EntitySoul(World w) {
 		super(w);
 		this.setSize(0.5F, 1.0F);
 	}
-	
-	protected Entity findPlayerToAttack()
-    {
-        return this.worldObj.getClosestVulnerablePlayerToEntity(this, sightRange);
-    }
+
+	protected Entity findPlayerToAttack(World w)
+	{
+		double p_72846_1_ = this.posX;
+		double p_72846_3_ = this.posY;
+		double p_72846_5_ = this.posZ;
+		double p_72846_7_ = this.sightRange;
+		
+///////////////////////
+// BEGIN COPIED CODE
+		
+        double d4 = -1.0D;
+        EntityPlayer entityplayer = null;
+
+        for (int i = 0; i < w.playerEntities.size(); ++i)
+        {
+            EntityPlayer entityplayer1 = (EntityPlayer)w.playerEntities.get(i);
+
+            if (!entityplayer1.capabilities.disableDamage && entityplayer1.isEntityAlive())
+            {
+                double d5 = entityplayer1.getDistanceSq(p_72846_1_, p_72846_3_, p_72846_5_);
+                double d6 = p_72846_7_;
+
+                if (entityplayer1.isSneaking())
+                {
+                    d6 = p_72846_7_ * 0.800000011920929D;
+                }
+
+                if (entityplayer1.isInvisible())
+                {
+                    float f = entityplayer1.getArmorVisibility();
+
+                    if (f < 0.1F)
+                    {
+                        f = 0.1F;
+                    }
+
+                    d6 *= (double)(0.7F * f);
+                }
+
+// END COPIED CODE
+/////////////////////
+
+				// Lookup whether this player is "pillaring".
+                // If not, then the distance to the player is multiplied by K
+                final double K = 5.0;
+				if(!w.isRemote) {
+					String name = entityplayer1.getCommandSenderName();
+					
+					double scale = 1.0 + (K - 1.0) * DKWFMLEvents.instance.getBlocksNearby(name);
+					d5 *= scale;
+				}
+
+///////////////////////
+// BEGIN COPIED CODE
+                
+                if ((p_72846_7_ < 0.0D || d5 < d6 * d6) && (d4 == -1.0D || d5 < d4))
+                {
+                    d4 = d5;
+                    entityplayer = entityplayer1;
+                }
+            }
+        }
+
+        return entityplayer;
+        
+// END COPIED CODE
+/////////////////////
+	}
 
     protected void applyEntityAttributes()
     {
@@ -104,7 +170,7 @@ public class EntitySoul extends EntityFlying implements IMob {
 
         if (this.targetedEntity == null || this.aggroCooldown-- <= 0)
         {
-            this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, sightRange);
+            this.targetedEntity = this.findPlayerToAttack(this.worldObj);
 
             if (this.targetedEntity != null)
             {

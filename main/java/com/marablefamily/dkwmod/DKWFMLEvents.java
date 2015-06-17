@@ -41,6 +41,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 
 public class DKWFMLEvents {
+	public static DKWFMLEvents instance;
 
 	int tickCount = 0;
 	int height = 1;
@@ -49,17 +50,19 @@ public class DKWFMLEvents {
 	int timeToMax = 140;
 	
 	public DKWFMLEvents() {
-		
+		if(instance != null)
+			throw new Error("There can only be ONE!");
+		instance = this;
 	}
 	
 	Random random = new Random();
 	
-	class ExtraPlayerState {
+	public class ExtraPlayerState {
 		public int standingTime;
 		public int blocksNearby;
 	}
 	
-	HashMap<String, ExtraPlayerState> extraPlayerState = new HashMap<String, ExtraPlayerState>();
+	public HashMap<String, ExtraPlayerState> extraPlayerState = new HashMap<String, ExtraPlayerState>();
 	
 	int deathTargetDimension = -2;
 	
@@ -187,11 +190,12 @@ public class DKWFMLEvents {
 		}
 	}
 
+	private static final int K = 300;
 	private void updateBlocksNearby(PlayerTickEvent e, ExtraPlayerState s) {
 		
 		// Approximately 12.5% of nearby blocks should be non-air.
 		// If fewer, then the count will drift to zero.
-		// If more, then the count will drift to 300.
+		// If more, then the count will drift to K.
 		
 		World w = e.player.worldObj;
 		
@@ -201,11 +205,18 @@ public class DKWFMLEvents {
 		if(w.getBlock(x, y, z) == Blocks.air)
 			s.blocksNearby = Math.max(0, s.blocksNearby - 1);
 		else
-			s.blocksNearby = Math.min(300, s.blocksNearby + 7);
+			s.blocksNearby = Math.min(K, s.blocksNearby + 7);
 
 		// for debugging
 //		if(random.nextInt(30) == 0)
 //			System.out.println(s.blocksNearby);
+	}
+	
+	public double getBlocksNearby(String name) {
+		ExtraPlayerState s = this.extraPlayerState.get(name);
+		if(s == null)
+			return 0.0;
+		return (double) s.blocksNearby / K;
 	}
 	
 	private void updateFrostBoots(PlayerTickEvent e, ExtraPlayerState extra) {
